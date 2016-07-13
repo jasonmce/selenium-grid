@@ -1,0 +1,24 @@
+version: "2"
+
+services:
+  hub:
+    container_name: hub
+    image: selenium/hub
+    ports:
+      - "4444:4444"
+  firefox:
+    image: selenium/node-firefox
+    environment:
+      - HUB_PORT_4444_TCP_ADDR=hub
+    expose:
+      - "5555"
+  chrome:
+    image: selenium/node-chrome
+    environment:
+      - HUB_PORT_4444_TCP_ADDR=hub
+    expose:
+      - "5555"
+networks:
+  default:
+    external:
+      name: SELENIUM-GRID-SAFETY-NET 
